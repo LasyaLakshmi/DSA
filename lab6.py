@@ -1,49 +1,44 @@
 import heapq
-
 class MinHeap:
-    def __init__(self):
-        self.heap = []
+    def _init_(self):
+        self.heap=[]
 
-    def insert(self, val):
-        heapq.heappush(self.heap, val)
+    def insert(self,value):
+            heapq.heappush(self.heap,value)
 
     def extract_min(self):
-        if not self.heap:
-            return None
-        return heapq.heappop(self.heap)
+                if not self.heap:
+                    return None
+                return heapq.heappop(self.heap)
+            
+    def heapify(self,arr):
+                self.heap=arr
+                heapq.heapify(self.heap)
 
-    def heapify(self, iterable):
-        self.heap = list(iterable)
-        heapq.heapify(self.heap)
+    def display(self):
+                print("Min-Heap: ",self.heap)            
 
-    def __str__(self):
-        return str(self.heap)
 
-def heapsort(iterable):
-    h = MinHeap()
-    h.heapify(iterable)
-    sorted_list = []
-    while h.heap:
-        sorted_list.append(h.extract_min())
+h=MinHeap()
+arr=[3,8,67,56,2,3,5,9,11]
+print("Original array: ",arr)
+h.heapify(arr)
+h.display()
+h.insert(1)
+h.display()
+print("Extracted thing is: ",h.extract_min())
+h.display()
+
+import heapq
+def heap_sort(arr):
+    heap=arr[:]
+    heapq.heapify(heap)
+    sorted_list=[]
+    while heap:
+        smallest = heapq.heappop(heap)
+        sorted_list.append(smallest)
     return sorted_list
 
-# Take input from user as space-separated integers
-user_input = input("Enter numbers separated by space: ")
-test_list = list(map(int, user_input.split()))
-
-# Test MinHeap operations
-min_heap = MinHeap()
-min_heap.heapify(test_list)
-print("Heap after heapify:", min_heap)
-
-min_heap.insert(5)
-print("Heap after inserting 5:", min_heap)
-
-min_val = min_heap.extract_min()
-print("Extracted min:", min_val)
-print("Heap after extracting min:", min_heap)
-
-# Test heapsort
-sorted_list = heapsort(test_list)
-print("Heapsort result:", sorted_list)
-print("Tejaswini-24303")
+arr=[4,30,3,25,16,9]
+print("Original array: ",arr)
+print("Heap sorted array: ",heap_sort(arr))

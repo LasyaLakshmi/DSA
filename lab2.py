@@ -1,121 +1,78 @@
+# Node class
 class Node:
-    def __init__(self, data):
+    def _init_(self, data):
         self.data = data
         self.next = None
 
+# Linked List class
 class LinkedList:
-    def __init__(self):
+    def _init_(self):
         self.head = None
 
-    def add_first(self, data):
-        new_node = Node(data)
-        new_node.next = self.head
-        self.head = new_node
+    # Insert at front
+    def InsertFront(self,data):
+        New_Node = Node(data)
+        New_Node.next = self.head
+        self.head = New_Node
 
-    def add_last(self, data):
-        new_node = Node(data)
-        if not self.head:
-            self.head = new_node
+    # Insert at end
+    def InsertEnd(self,data):
+        New_Node = Node(data)
+        if self.head == None:
+            self.head = New_Node
             return
-        curr = self.head
-        while curr.next:
-            curr = curr.next
-        curr.next = new_node
-
-    def del_first(self):
-        if not self.head:
-            print("List is empty! Cannot delete.")
+        else:
+            ptr = self.head
+            #loop till end
+            while ptr.next:
+                ptr = ptr.next
+            ptr.next = New_Node
+    
+    # Delete at front
+    def DeleteFront(self):
+        if self.head == None:
+            print("LinkedList is Empty")
             return
-        print(f"Deleted from front: {self.head.data}")
-        self.head = self.head.next
+        else:
+            self.head = self.head.next
 
-    def print_list(self):
-        curr = self.head
-        if not curr:
-            print("List is empty.")
+    # Delete at back
+    def DeleteEnd(self):
+        if self.head is None:
+            print("Linked List is empty!")
             return
-        print("Linked List: ", end="")
-        while curr:
-            print(curr.data, end=" -> ")
-            curr = curr.next
-        print("None")
+        ptr = self.head
+        while ptr.next.next:
+            ptr = ptr.next
+        ptr.next = None
 
-class Stack:
-    def __init__(self):
-        self.top = None
+    #Search
+    def Search(self, data):
+        ptr = self.head
+        pos = 0
+        while ptr:
+            if ptr.data == data:
+                print(f"Element {data} found at position {pos}.")
+                return
+            ptr = ptr.next
+            pos += 1
+        print(f"Element {data} not found in the list.")
+    
+    # Traverse the LinkedList
+    def Traverse(self):
+        ptr = self.head
+        while ptr:
+            print(ptr.data,end="-->")
+            ptr = ptr.next
+        print("NULL")
 
-    def is_empty(self):
-        return self.top is None
-
-    def push(self, data):
-        new_node = Node(data)
-        new_node.next = self.top
-        self.top = new_node
-        print(f"Pushed: {data}")
-
-    def pop(self):
-        if self.is_empty():
-            print("Stack is empty! Cannot pop.")
-            return None
-        popped_data = self.top.data
-        self.top = self.top.next
-        print(f"Popped: {popped_data}")
-        return popped_data
-
-    def peek(self):
-        if self.is_empty():
-            print("Stack is empty! Nothing to peek.")
-            return None
-        print(f"Top element: {self.top.data}")
-        return self.top.data
-
-    def display(self):
-        curr = self.top
-        if not curr:
-            print("Stack is empty.")
-            return
-        print("Stack (top -> bottom): ", end="")
-        while curr:
-            print(curr.data, end=" -> ")
-            curr = curr.next
-        print("None")
-
-def main():
-    print("=== Singly Linked List Operations ===")
-    ll = LinkedList()
-    n = int(input("How many elements to insert at front? "))
-    for i in range(n):
-        val = int(input(f"Enter value {i + 1} to insert at front: "))
-        ll.add_first(val)
-        ll.print_list()
-
-    m = int(input("How many elements to insert at end? "))
-    for i in range(m):
-        val = int(input(f"Enter value {i + 1} to insert at end: "))
-        ll.add_last(val)
-        ll.print_list()
-
-    print("\nDeleting the front node...")
-    ll.del_first()
-    ll.print_list()
-    print("Traversing linked list:")
-    ll.print_list()
-
-    print("\n=== Stack Operations Using Linked List ===")
-    stack = Stack()
-    p = int(input("How many elements to push onto stack? "))
-    for i in range(p):
-        val = int(input(f"Enter value {i + 1} to push: "))
-        stack.push(val)
-        stack.display()
-
-    print("\nPerforming one pop operation from stack...")
-    stack.pop()
-    stack.display()
-
-    print("\nPeeking top element of the stack...")
-    stack.peek()
-
-if __name__ == "__main__":
-    main()
-print("Tejaswini-24303")    
+# Testing
+LL = LinkedList()
+LL.InsertFront(10)
+LL.InsertFront(5)
+LL.InsertEnd(20)
+LL.Traverse()
+LL.DeleteFront()
+LL.DeleteEnd()
+LL.Traverse()
+LL.Search(10)

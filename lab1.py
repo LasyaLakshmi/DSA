@@ -1,52 +1,28 @@
-def traverse(arr):
-    for elem in arr:
-        print(elem, end=" ")
-    print()
+arr=[5,3,8,1,9]
 
-def insert(arr, index, value):
-    return arr[:index] + [value] + arr[index:]
+#Traversing
+for i in arr:
+    print(i, end = " ")
 
-def delete(arr, index):
-    return arr[:index] + arr[index+1:]
+#inserting
+n=int(input("\nGive the number to be inserted: "))
+i=int(input("\nGive the index: "))
+arr=arr[:i]+[n]+arr[i:]
+print("\nArray after inserting:",arr)
 
-def linear_search_range(arr, value):
-    for idx in range(len(arr)):
-        if arr[idx] == value:
-            return idx
-    return -1
+#deleting
+m=int(input("\nGive index to be deleted: "))
+arr=arr[:m]+arr[m+1:]
+print("\nArray after deleting: ",arr)
 
-def update(arr, index, value):
-    arr[index] = value
-    return arr
+#searching
+l=int(input("\nGive element to search: "))
+for j in range(len(arr)):
+    if arr[j]==l:
+        print("\nThe element is found at index ",j)
 
-# --------- User Input Section ---------
-# Initial array
-lst = list(map(int, input("Enter list elements separated by space: ").split()))
-print("Original list:")
-traverse(lst)
-
-# Insert
-index = int(input("Enter index to insert: "))
-value = int(input("Enter value to insert: "))
-lst = insert(lst, index, value)
-print(f"After inserting {value} at index {index}:")
-traverse(lst)
-
-# Delete
-del_index = int(input("Enter index to delete: "))
-lst = delete(lst, del_index)
-print(f"After deleting element at index {del_index}:")
-traverse(lst)
-
-# Linear search
-search_value = int(input("Enter value to search: "))
-idx_range = linear_search_range(lst, search_value)
-print(f"Index of {search_value} (using range): {idx_range}")
-
-# Update
-update_index = int(input("Enter index to update: "))
-update_value = int(input("Enter new value: "))
-lst = update(lst, update_index, update_value)
-print(f"After updating index {update_index} to {update_value}:")
-traverse(lst)
-print("Tejaswini-24303")
+#updating
+x=int(input("\nGive the number to be Updated: "))
+y=int(input("\nGive the index: "))
+arr[y]=x
+print("\nArray after updating: ",arr)
